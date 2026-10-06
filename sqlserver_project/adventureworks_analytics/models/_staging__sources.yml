@@ -1,0 +1,27 @@
+version: 2
+
+sources:
+  - name: adventureworks_sales
+    database: AdventureWorks
+    schema: Sales
+    description: >
+      Tabelas do banco de produção (ERP), schema Sales — pedidos e clientes
+      no nível transacional. O dbt só lê daqui, nunca escreve.
+    tables:
+      - name: Customer
+      - name: SalesOrderHeader
+      - name: SalesOrderDetail
+
+  - name: adventureworks_production
+    database: AdventureWorks
+    schema: Production
+    description: Tabelas do schema Production do ERP — catálogo de produtos.
+    tables:
+      - name: Product
+
+  - name: adventureworks_person
+    database: AdventureWorks
+    schema: Person
+    description: Tabelas do schema Person do ERP — dados cadastrais de pessoas físicas.
+    tables:
+      - name: Person

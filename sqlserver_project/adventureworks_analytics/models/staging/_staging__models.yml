@@ -1,0 +1,64 @@
+version: 2
+
+models:
+  - name: stg__customers
+    description: Um cliente por linha. Pode ser pessoa física (person_id preenchido) ou loja/pessoa jurídica (store_id preenchido) — nunca os dois ao mesmo tempo.
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg__person
+    description: Dados cadastrais de pessoas físicas do ERP.
+    columns:
+      - name: person_id
+        tests:
+          - unique
+          - not_null
+
+  - name: stg__orders
+    description: Um pedido por linha.
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg__customers')
+                field: customer_id
+
+  - name: stg__order_details
+    description: Um item de pedido por linha.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - order_id
+            - order_detail_id
+    columns:
+      - name: order_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg__orders')
+                field: order_id
+      - name: product_id
+        tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg__products')
+                field: product_id
+
+  - name: stg__products
+    description: Um produto por linha.
+    columns:
+      - name: product_id
+        tests:
+          - unique
+          - not_null
