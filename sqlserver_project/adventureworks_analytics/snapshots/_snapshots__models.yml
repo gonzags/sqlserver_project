@@ -8,3 +8,10 @@ snapshots:
         tests:
           - unique
           - not_null
+  - name: snap_customer
+    description: Histórico de versões do cliente do ERP (SCD tipo 2), observando território, pessoa e loja.
+    columns:
+      - name: dbt_scd_id
+        tests:
+          - unique
+          - not_null
