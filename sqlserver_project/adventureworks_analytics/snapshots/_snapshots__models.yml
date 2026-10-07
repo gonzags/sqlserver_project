@@ -1,0 +1,10 @@
+version: 2
+
+snapshots:
+  - name: snap_product
+    description: Histórico de versões de produto do ERP (SCD tipo 2). Uma linha por versão de preço/custo/nome.
+    columns:
+      - name: dbt_scd_id
+        tests:
+          - unique
+          - not_null

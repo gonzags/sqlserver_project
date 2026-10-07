@@ -1,0 +1,14 @@
+.venv/
+__pycache__/
+*.pyc
+
+target/
+dbt_packages
+logs/
+.user.yml
+*.log
+
+.env
+.vscode/settings.json
+scratch.sql
+sqlserver_project/logs
